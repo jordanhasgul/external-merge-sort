@@ -1,4 +1,4 @@
-# External Merge Sort for Large Data Sets
+# External Merge Sort
 A simple command line program for sorting large data sets stored in the [CSV file format](https://en.wikipedia.org/wiki/Comma-separated_values).
 
 ## Description
