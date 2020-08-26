@@ -7,13 +7,10 @@ External sorting algorithms are a class of sorting algorithms that are capable o
 The algorithm works as follows:
 
 1. **Splitting of file into sorted runs**\
-A maximum of n rows are read from the input file and are inserted into a priority queue which sorts each row as it is inserted. This is achieved through the use of a comparator that compares rows based on a specified field. The sorted run of rows is then extracted and written into a temporary 'split' file.
+A maximum of n rows are read from the input file and are inserted into a priority queue which sorts each row as it is inserted. This is achieved through the use of a comparator that compares rows based on a specified field. The sorted run of rows is then extracted and written into a temporary file, referred to as a split file. This process is repeated until all rows in the input file have been processed, leaving k split files.
 
 2. **Iterative merging of the sorted runs**\
-The sorted runs are then iteratively merged, using a 2-way merge, until the last pair-wise merge is used to produce the sorted output file.
+The k split files are then iteratively merged, using a 2-way merge, until the last pair-wise merge is used to produce the sorted output file.
 
 ## Usage
-To begin sorting large data sets, simply, compile and run the program from the command line and specify the following command line arguments:
-```
-  sort <source file> <output file> <column name>
-```
+
