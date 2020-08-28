@@ -16,26 +16,16 @@ public class CsvUtils
     private static final int NUM_ROW_LIMIT = 50;
     private static final FilenameFilter FILTER = (directory, name) -> name.startsWith("temp_");
 
-    public static void copyCsv(Path fromPath, Path toPath) throws Exception
-    {
-        try (BufferedReader br = Files.newBufferedReader(fromPath); BufferedWriter bw = Files.newBufferedWriter(toPath))
-        {
-            CsvFormatter formatter = new CsvFormatter(br);
-            formatter.writeHeader(bw);
-
-            String[] row = null;
-            while((row = formatter.readRow(br)) != null)
-            {
-                formatter.writeRow(bw, row);
-            }
-        }
-    }
     public static void sortCsv(Path fromPath, Path toPath, String columnName) throws Exception
     {
         Path[] paths = splitSort(fromPath, columnName);
         mergeList(paths, columnName, toPath);
 
-        removeTempFiles(fromPath);
+        File directory = fromPath.getParent().toFile();
+        for (File file : directory.listFiles(FILTER))
+        {
+            file.delete();
+        }
     }
 
     private static Path[] splitSort(Path fromPath, String columnName) throws Exception
@@ -119,15 +109,7 @@ public class CsvUtils
             pathList.add(mergePath);
         }
 
-        copyCsv(pathList.poll(), toPath);
-    }
-
-    private static void removeTempFiles(Path fromPath)
-    {
-        File directory = fromPath.getParent().toFile();
-        for (File file : directory.listFiles(FILTER))
-        {
-            file.delete();
-        }
+        Path sortedOutput = pathList.poll();
+        Files.move(sortedOutput, toPath);
     }
 }
