@@ -13,11 +13,11 @@ A maximum of ![](images/n.png) rows are read from the input file and are inserte
 The ![](images/k.png) split files are then iteratively merged, using a 2-way merge, until the last pair-wise merge is used to produce the sorted output file.
 
 ## Usage
-To begin using this program, open the command line and navigate to the 'src' folder. Then, to compile, type the following command into the command line:
+To begin using this program, open the command line and navigate to the 'src' folder. Then, to compile, enter the following command into the command line:
 ```
 javac *.java
 ```
-Finally, to run, type the following command into the command line:
+Finally, to run, enter the following command into the command line:
 ```
 java ems <input file path> <output file path> <column name>
 ```
